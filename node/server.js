@@ -20,7 +20,6 @@ http.createServer(function(req, res) {
             var totalMemMB = round(((os.totalmem()/1024)/1024),3);
             var freeMemMB = round(((os.freemem()/1024)/1024),3);
             var seconds = os.uptime();
-            console.log(seconds);
             var d = Math.floor(seconds / (3600*24));
             var h = Math.floor(seconds % (3600*24) / 3600);
             var m = Math.floor(seconds % 3600 / 60);

@@ -137,6 +137,7 @@ by asking the user to randomly pick which row or column to have the script parse
 Here I uses some regex to ensure correct user input.
 
 ```while True:  
+```while True:  
       selection = input("please select either [1]row or [2]column: ")
       if not re.match("[1-2]*$", selection):
         print("Error! Please enter a [1] or a [2]")

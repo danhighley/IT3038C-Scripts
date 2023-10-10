@@ -23,29 +23,45 @@ You have a couple options to run this script:
     - from a Python virtualENV
 
     - or directly from you local machines github repository
-    
+
     depending on what your comfortable with.
 
 *VirtualENV setup
 
 Following the Week 7 documentation didn't work for me so I had to do a little research.
+
     -pip wasn't working from PowerShell
+
     -and my system didnt have the folders set up to match commands outline in Week 7 docs.
 
 Again, I did this in Windows 11.
+
 Decide where you want you python virtual environment to live.
+
     I created the folder venv on my C directory
+
     Move to that directory
+
     `C:\venv`
+
     In that directory run the following command
+
     `python -m venv NumPy`   // the last "NumPy" is folder name and can be anything you want.
+
     `cd NumPy`   // to move into the environment folder then type:
+
     `Scripts\activate.ps1`
+
     You should see (NumPy) in front of your command line like this:
+
     (NumPy) PS C:\venv\NumPy>
+
     You know your virtual python environment is working if you do.
+
     Now you can install the python plug in module NumPy by typing:
+
     `pip install numpy`
+
     Now you should be able to copy the script to a .py file and run it.
 
 *Installing Numpy on your local machine with out using VirtualENV
@@ -98,11 +114,11 @@ I start by creating a 2D array using NumPy: 5 columns and 5 rows of random integ
 
 ```array = np.random.randint(100, size = (5, 5))```
 
- Random 5x5 array
-[[51 76 32 48 78]
- [23 87 61 99  9]
- [10 10 62 28 77]
- [77 92 38 30 29]
+ Random 5x5 array  
+[[51 76 32 48 78]  
+ [23 87 61 99  9]  
+ [10 10 62 28 77]  
+ [77 92 38 30 29]  
  [85 93 76 19 64]]
 
 The first part of the script shows the use of argmax, argmin, max and min by pulling out minimum, maximum values, the indices of where they are, and calculating the positions.

@@ -19,8 +19,11 @@ In the scipt for Lab 7, I focused on a few simple 2D array functions that NumPy 
 **Setup
 
 You have a couple options to run this script:
+
     - from a Python virtualENV
+
     - or directly from you local machines github repository
+    
     depending on what your comfortable with.
 
 *VirtualENV setup

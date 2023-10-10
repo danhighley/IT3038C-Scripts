@@ -133,13 +133,14 @@ The average of the random values contained in the entire array is: 54.16.`
 
 Then I move into demonstrating how NumPy can easily parse out values from individual rows and columns
 by asking the user to randomly pick which row or column to have the script parse.
+
 Here I uses some regex to ensure correct user input.
 
-```while True:
-    selection = input("please select either [1]row or [2]column: ")
-    if not re.match("[1-2]*$", selection):
+```while True:  
+      selection = input("please select either [1]row or [2]column: ")
+      if not re.match("[1-2]*$", selection):
         print("Error! Please enter a [1] or a [2]")
-    else:
+      else:
         break     ```
 
  Random 5x5 array

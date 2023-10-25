@@ -3,6 +3,9 @@
 # This PowerShell script will tell you the volume of the hard
 # drives on your system and how much space is used / free.
 
+# It will also send out a warning via window popup should a hard
+# drive fall below a specified remaining storage threshold.
+
 # Script is run from the Powershell command line ./spacewaring.ps1
 
 # Find host(computer) name and its IP address

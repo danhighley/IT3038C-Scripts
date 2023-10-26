@@ -39,7 +39,8 @@ Then assign the found drive letters to an array.
         if ($vol.DriveType -eq 3 -And $vol.DriveLetter -ne $null ) {
             $drives += $vol.DriveLetter[0];
         }
-    }```
+    }
+```
 
 Move through each element in the drive letter array and extract drive storage specs.
 

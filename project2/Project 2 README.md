@@ -50,7 +50,8 @@ Move through each element in the drive letter array and extract drive storage sp
     $diskUsed = [math]::round($disk.Used/1GB,2)
     $diskTotal = [math]::round($diskFree + $diskUsed)
     Write-Host "Drive:" $d "has a total of"$diskTotal "GB ("$diskUsed "Used /"$diskFree "Free )"
-}```
+}
+```
 
 Set a flag to trigger warning to the user if available strorage space falls below threshold.
 
@@ -66,7 +67,8 @@ If warning needs to be sent, move through the drive letter array and store warni
             # to use in window pop up.
             $WarnText = ('Warning > Drive: ' + $d + ' has less than ' + $minSize + 'GB space available.')
             $WarnArray += @($WarnText)
-        } ```
+        } 
+```
 
 Send warning array to a window pop up using Windows Scripting Host.
 

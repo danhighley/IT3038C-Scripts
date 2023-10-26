@@ -3,11 +3,12 @@
 ==========
 
 ***For Project 1, I chose to do a PowerShell script for one of the listed suggestions:
-"Write a script that tells you how much hard drive space you have left:
+"Write a script that tells you how much hard drive space you have left"
+The script would accomodate multiple drives and display info on the console.
 
 ==========
 
-***For Project 2, I chose to expand upon the Project 1 script and create a script that will alert the user with a warning if any hard drive on their computer falls below a specified remaining storage limit.
+***When i think of scripts, I envision something running in the background perfoming a function the user isn't normally thinking about. For Project 2, I chose to expand upon the Project 1 script and create a script that will alert the user with a warning if any hard drive on their computer falls below a specified remaining storage limit.
 
 ==========
 
@@ -52,7 +53,7 @@ Move through each element in the drive letter array and extract drive storage sp
 
 Set a flag to trigger warning to the user if available strorage space falls below threshold.
 
-If warning needs to be sent, move through the drive letter array and store warning messages to new array. I didn't want multiple popups for each drive below the threshold, just one warning sent that would list allow drives below threshold. The new array solves this.
+If warning needs to be sent, move through the drive letter array and store warning messages to new array. I didn't want multiple popups for each drive below the threshold, just one warning sent that would list all drives below threshold. The new array solves this.
 
 ``` foreach ($d in $drives) {
         $disk = Get-PSDrive $d;
@@ -66,13 +67,9 @@ If warning needs to be sent, move through the drive letter array and store warni
             $WarnArray += @($WarnText)
         } ```
 
-        
+Send warning array to a window pop up using Windows Scripting Host.
 
-
-
-
-
-
-
-
+``` $wsh = New-Object -ComObject Wscript.Shell
+    $wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
+```
 ===========

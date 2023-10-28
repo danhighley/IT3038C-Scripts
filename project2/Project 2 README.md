@@ -107,8 +107,8 @@ Again, I'm using Windows 11
 specify the path for the application ```powershell.exe```.
 23.	In the **Add arguments (optional)**: field add the arguments for powershell.exe and the path to the script.
 for example: 
-```-ExecutionPolicy Bypass -WindowStyle Hidden -file C:\Project2\spacewarning.ps1```
-The argument "-ExecutionPolicy Bypass" ensures that the script runs successfully.
+```-ExecutionPolicy Bypass -WindowStyle Hidden -file C:\Project2\spacewarning.ps1```   
+The argument "-ExecutionPolicy Bypass" ensures that the script runs successfully.   
 The argument "-WindowStyle Hidden" hides the PowerShell console.
 24.	Leave the **"Start in (optional)"** field blank - its misleading, put the file path in the arguments field like the example above.
 25.	Click the **OK** button.

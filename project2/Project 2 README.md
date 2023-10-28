@@ -1,14 +1,14 @@
-* Project 2
+## Project 2
 
 ==========
 
-***For Project 1, I chose to do a PowerShell script for one of the listed suggestions:
+For Project 1, I chose to do a PowerShell script for one of the listed suggestions:
 "Write a script that tells you how much hard drive space you have left"
 The script would accomodate multiple drives and display info on the console.
 
 ==========
 
-***When i think of scripts, I envision something running in the background perfoming a function the user isn't normally thinking about. For Project 2, I chose to expand upon the Project 1 script and create a script that will alert the user with a warning if any hard drive on their computer falls below a specified remaining storage limit.
+When i think of scripts, I envision something running in the background perfoming a function the user isn't normally thinking about. For Project 2, I chose to expand upon the Project 1 script and create a script that will alert the user with a warning if any hard drive on their computer falls below a specified remaining storage limit.
 
 ==========
 
@@ -16,7 +16,7 @@ The script name is spacewarning.ps1 in the Project 2 Github repository, and once
 
 ==========
 
-**Elements used in the script
+**Elements used in the script**
 
 The script is thoroughly commented but I'll touch on how the script flows.
 
@@ -78,5 +78,46 @@ $wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
 ```
 ===========
 
-* Getting the script to autorun at startup
+## Getting the script to autorun at startup
 
+Again, I'm using Windows 11
+
+1.	Open **Start**.
+2.	Search for **Task Scheduler** and click the app to open it.
+3.	Highlight the "Task Scheduler Library" branch then Right-click it and select the **New Folder** option.
+4.	Type a name for the folder - for example, in this case "Project2".
+5.	Click the **OK** button.
+6.	Expand the "Task Scheduler Library" branch and select the **Project2** folder.
+7.	In the Actions menu, click the **Create Task** option.
+8.	Type a short descriptive name for the task, for example in this case, "Hard Drive Space Warning Script", in the **Name** field.
+9.	(Optional) Compose a description for the task in the **Description** field.
+10.	In the **Security options** section, Select the **"Run only when user is logged on"**. We need this option as the other will prevent the user from seeing the pop up warning.
+11.	(Optional) Check the **"Run with highest privileges"** option if the task requires elevated privileges.
+12.	The "Configure for" settings should be left alone unless required.
+13.	Click the **Triggers** tab.
+14.	Click the **New** button.
+15.	Use the **Begin the task** drop-down menu to select **"At log on"**.
+16.	 In the **Advanced settings** section, select **"Delay task for:  30 seconds"** or 1 minute depending on how fast your startup scripts take.
+17.	Make sure the **Enabled** option is checked.
+18.	Click the **OK** button.
+19.	Click the **Action** tab.
+20.	Click the **New** button.
+21.	Select the **Start a program** option using the **Action** drop-down menu.
+22.	Under the **"Settings"** section, in the **"Program/script"** field, 
+specify the path for the application ```powershell.exe```.
+23.	In the **Add arguments (optional)**: field add the arguments for powershell.exe and the path to the script.
+for example: 
+```-ExecutionPolicy Bypass -WindowStyle Hidden -file C:\Project2\spacewarning.ps1```
+The argument "-ExecutionPolicy Bypass" ensures that the script runs successfully.
+The argument "-WindowStyle Hidden" hides the PowerShell console.
+24.	Leave the **"Start in (optional)"** field blank - its misleading, put the file path in the arguments field like the example above.
+25.	Click the **OK** button.
+26.	Click the **OK** button.
+
+After completing these steps, the task will run automatically during next log on.
+
+Because I have a small partition on one of my drives:
+
+This is what I see when I log into my system:
+
+![Alt text](image.png)

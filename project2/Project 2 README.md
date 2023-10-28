@@ -76,3 +76,6 @@ Send warning array to a window pop up using Windows Scripting Host.
     $wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
 ```
 ===========
+
+* Getting the script to autorun at startup
+

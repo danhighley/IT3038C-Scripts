@@ -72,7 +72,7 @@ if ($Warn -eq 1) {
             Write-Host "Warning > Drive:" $d "has less than" $minSize"GB space available."
             
             # Store warning text into an array in case of multiple warnings
-            # to use in window pop up.
+            # to use in one window pop up.
             $WarnText = ('Warning > Drive: ' + $d + ' has less than ' + $minSize + 'GB space available.')
             $WarnArray += @($WarnText)
         } 
@@ -83,7 +83,11 @@ if ($Warn -eq 1) {
     $wsh = New-Object -ComObject Wscript.Shell
     $wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
     
-    # Reset array.
-    $WarnArray = @()
+    
+}else {
+            Write-Host "All drives have more than" $minSize"GB space available."
 }
 
+# Reset arrays.
+$WarnArray = @()
+$drives = @()

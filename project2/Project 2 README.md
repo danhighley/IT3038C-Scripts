@@ -27,7 +27,7 @@ The script first pulls some system information:
 
 Establishes the minimum disk size to raise a warning to 20GB
 
-```$minSize = 20GB```
+```$minSize = 20GB```   
 ```$minSize = [math]::Round($minSize/1GB,2)```
 
 Find all the hard drives on the system by filtering through Get-WmiOject win32_volume data.

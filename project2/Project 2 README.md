@@ -72,8 +72,9 @@ If warning needs to be sent, move through the drive letter array and store warni
 
 Send warning array to a window pop up using Windows Scripting Host.
 
-``` $wsh = New-Object -ComObject Wscript.Shell
-    $wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
+``` 
+$wsh = New-Object -ComObject Wscript.Shell
+$wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
 ```
 ===========
 

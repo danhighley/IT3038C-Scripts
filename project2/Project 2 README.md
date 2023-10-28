@@ -80,7 +80,7 @@ $wsh.Popup($WarnArray,0,"Hard Drive Space Warning!",1+48)
 
 ## Getting the script to autorun at startup
 
-Again, I'm using Windows 11
+Again, I'm using Windows 11, should be very similar in Windows 10.
 
 1.	Open **Start**.
 2.	Search for **Task Scheduler** and click the app to open it.
@@ -106,7 +106,7 @@ Again, I'm using Windows 11
 22.	Under the **"Settings"** section, in the **"Program/script"** field, 
 specify the path for the application ```powershell.exe```.
 23.	In the **Add arguments (optional)**: field add the arguments for powershell.exe and the path to the script.
-for example: 
+for example:    
 ```-ExecutionPolicy Bypass -WindowStyle Hidden -file C:\Project2\spacewarning.ps1```   
 The argument "-ExecutionPolicy Bypass" ensures that the script runs successfully.   
 The argument "-WindowStyle Hidden" hides the PowerShell console.
@@ -121,3 +121,14 @@ Because I have a small partition on one of my drives:
 This is what I see when I log into my system:
 
 ![Alt text](image.png)
+
+===========
+
+You can test the script by modifying the #minSize variable on line 21.   
+for example: if you have a 1 terabyte hard drive, set the variable to 1000GB   
+and run it from a PowerShell console in the saved directory with ./spacewarning.ps1.    
+    
+or    
+   
+You can set it up to run when you log on by using the Task Scheduler     
+and forget about it till a hard drive falls below your set threshold. 

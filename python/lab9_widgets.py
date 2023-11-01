@@ -9,7 +9,7 @@ print()  # formatting
 
 # Iterate through each element of the json data.
 for i in data:
-    print(i['name']+" is "+i['color'])
+    print(i['name']+" is "+i['color']+".")
 
 print() # formatting
     

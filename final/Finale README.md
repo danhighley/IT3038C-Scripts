@@ -53,6 +53,8 @@ with the following commands:
 ```pip install prettytable```   
 ```pip install apscheduler```   
 
+The rest of the modules used should already be loaded, if not, use the pip install method to load them.
+
 ==========
 
 **Copy the files from GitHub**
@@ -262,5 +264,5 @@ The use of the variables allows the web site to update its data every 10 seconds
 
 ===========
 
-The loopback 127.0.0.1 is fine when testing.
+The loopback 127.0.0.1 is fine when testing.    
 With a little tweeking of the host firewall settings I was able to connect to the ip url (in my case: 192.168.1.252:5000) from other devices as intended.

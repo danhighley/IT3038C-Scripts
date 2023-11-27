@@ -1,0 +1,47 @@
+
+/* CSS Reset */
+body, header, nav, main, footer, img, h1, h3 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Style rule for body */
+body {
+    background-image: linear-gradient(to left, #0f12c0, #f8f8ff 50%);
+    width: auto;
+    float: none;
+}
+
+
+/* Style rule for headers */
+h3 {
+    border-top: 2px solid #1375b0;
+    width: 500px;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Style rule for tables */
+table, th, td {
+    table-layout: auto;
+ 
+    border: 1px solid;
+    padding: 2px;
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    margin: 0 auto;
+    margin-left: 0;
+    width: auto
+}
+
+/* Style rule for tables */
+footer {
+    font-size: .85em;
+    text-align: center;
+    padding: 2%;
+    margin: 0 auto;
+    margin-left: 0;
+    width: 440px;   
+}

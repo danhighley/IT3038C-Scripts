@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h3>System Name</h3>
+<p>{{ hName }}</p>
+<p> </p>
+
+<h3>Operating System</h3>
+<p>{{ opSystem }} {{ opRelease }}</p>
+<p> </p>
+
+<h3>Battery</h3>
+<p>{{ battery }}</p>
+<p> </p>
+
+<h3>Network</h3>
+{{ table | safe }}
+<p> </p>
+
+<h3>Memory</h3>
+{{ memTable | safe }}
+<p> </p>
+
+<h3>Top 5 Processes</h3>
+{{ procTable | safe }}
+
+{% endblock %}

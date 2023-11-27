@@ -15,24 +15,27 @@ The python scripts are web.py and sysmonitor.py and the supporting html files wi
 ==========
 
 **Python Virtural Environment**
+
 If your already used to Python's venv method of isolating your project then you can skip this and do what you know how to do.
 If not, do the following to set up your venv virtual environment:
 - create a folder on the C: drive called venv.    
 - in PowerShell move to that folder ```C:\venv```    
 - run the following command: ```python -m venv Flask```    
 - move to the newly created Flask folder: ```cd Flask```    
-- run the following command: ```Scripts\activate.ps1```    
+- run the following command: ```Scripts\activate.ps1```   
+
 You should see (Flask) in front of your command line like this:
 
 ![Alt text](Flask_CLI.png)
 
-This is where you will install the needed modules.
-This is where you will run the web server (web.py).
+This is where you will install the needed modules.     
+This is where you will run the web server (web.py).    
 The actual file can be stored somewhere else on your system.
 
 ==========
 
 **Python Modules you will need to run this Script**
+
 While your here:
 
 ![Alt text](Flask_CLI.png)
@@ -55,7 +58,7 @@ with the following commands:
 **Copy the files from GitHub**
 
 Copy the files from GitHub to your system including the folder setup.   
-These can be in a location of your choosing, but set up just like in Github.
+These can be in a location of your choosing, but set up just like in Github.    
 Parent folder can be name of your choosing.
 Flask needs the static and template folders to work properly.
 Files needed for this script:
@@ -77,13 +80,13 @@ Run the script while in the python venv virtual environment.
 
 ![Alt text](Flask_CLI.png)
 
-By entering 'python <path to the web.py file>':
+By entering ```python "path to the web.py file"```
 
 For example:
 
 ![Alt text](runscript.png)
 
-The script refreshes every 10 seconds. 
+The script refreshes every 10 seconds.     
 When you see the console output the system data you should be able to access the web page.
 
 Console output:
@@ -146,21 +149,24 @@ Using psutil to iterate through specific system data in conjunction with prettyt
 ```
 The prettytable format is designed for consoles. In order to pass it to the HTML later it needed to be converted to HTML format.
 
-```#convert memTable to html 
+```
+   #convert memTable to html 
    memTable = memTable.get_html_string()
 ```
 Notice the use of global variables inside the funciton - this allows variable to be passed from Flask to HTML outside of the function.
 
 At this point I initialized app to Flask
 
-```app = Flask(__name__, static_folder='static')
+```
+app = Flask(__name__, static_folder='static')
 app.config.from_object(__name__)
 ```
 This is also where you have to declare the static folder for where Flask can find the css style data.
 
 Before sending the variables to the HTML document we need to schedule a task with the apscheduler. 
 
-``` sched = BackgroundScheduler(daemon=True)    
+``` 
+sched = BackgroundScheduler(daemon=True)    
 sched.add_job(sensor,'interval',seconds=10)    
 sched.start()     
 ```
@@ -186,7 +192,8 @@ def monitor():
 
 Starting with the layout.html
 
-```<!DOCTYPE html>   
+```
+<!DOCTYPE html>   
     <html lang="en">    
     <head>    
         <title>IT 3038C Scripting Languages</title>   
@@ -205,19 +212,23 @@ Starting with the layout.html
 </html>    
 ```
 While you can spend alot of time developing these, there is a couple points to note:
-
-'<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}" />'
+```
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}" />
+```
 This is where you link the css styles that we declared earlier, allowing css styles to work on your HTML pages.
 
 and
 
-```{% block content %}   
-{% endblock %}```
+```
+{% block content %}   
+{% endblock %}
+```
 This defines where html data resides from subsequent HTML pages - in our case, we will see the link on our main.html
 
 The main.html consists of our variable links and some h3 headers.
 
-```{% extends "layout.html" %}   
+```
+{% extends "layout.html" %}   
 
 {% block content %}   
 
@@ -248,6 +259,7 @@ The main.html consists of our variable links and some h3 headers.
 ```    
 Notice all of the variables passed from Flask reside within the block content.
 The use of the variables allows the web site to update its data every 10 seconds.
+
 ===========
 
 The loopback 127.0.0.1 is fine when testing.

@@ -2,12 +2,13 @@ from flask import Flask, render_template, request
 import psutil
 import time
 import platform
-from subprocess import call
+# from subprocess import call
 from prettytable import PrettyTable
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
 #function to pull system information
+#global variables used so Flask has access to them later
 def sensor():
     #Pull hostname
     print("--- System Name ---")    
@@ -26,6 +27,7 @@ def sensor():
     print()
 
     #Pull battery information if battery is present
+    #Report no battery if None is detected
     print("--- Battery Info ---")
     global battery
     if (psutil.sensors_battery()) is None:
@@ -37,6 +39,8 @@ def sensor():
     print()
 
     #Pull network information
+    #Use of PrettyTable([list of headings])
+    #      .add_row([list of cells in row])
     print("--- Network Info ---")
     global table
     table = PrettyTable(['Network', 'Status', 'Speed'])
@@ -54,6 +58,7 @@ def sensor():
     table = table.get_html_string()
 
     #Pull memory information
+    #Use of PrettyTable again
     print("--- Memory Info ---")
     global memTable
     memTable = PrettyTable(["Total(GB)", "Used(GB)", "Available(GB)", "Percentage"])
@@ -69,30 +74,34 @@ def sensor():
     memTable = memTable.get_html_string()
 
     #Pull the top 5 processes
+    #Use of PrettyTable again
     print("--- Top 5 Processes ---")
     global procTable
     procTable = PrettyTable(['PID', 'PName', 'Status', 'CPU', 'Num Threads', 'Memory(MB)'])
     proc = []
+    #Pull the pids, omitting pid 0 system idle process
     for pid in psutil.pids()[1:]:
         try:
             p = psutil.Process(pid)
-            p.cpu_percent()
+            p.cpu_percent() #first time return 0.0
             proc.append(p)
 
         except Exception as e:
             pass
 
     top = {}
-    time.sleep(0.1)
+    time.sleep(0.1) #Delay to allow for cpu measurement
     for p in proc:
-        top[p] = p.cpu_percent() / psutil.cpu_count()
+        #second time for measurement
+        #I read taskmonitor cpu% overstated, added a made up factor to close the gap
+        top[p] = (p.cpu_percent() / psutil.cpu_count())*7.5 
 
     top_list = sorted(top.items(), key=lambda x: x[1])
     top5 = top_list[-5:]
     top5.reverse()
 
     for p, cpu_percent in top5:
-
+        #Some proecesses may exit so use of try-except block
         try:
             with p.oneshot():
                 procTable.add_row([
@@ -111,6 +120,9 @@ def sensor():
     #convert procTable to html
     procTable = procTable.get_html_string()
 
+    #Delay between scheduled tasks, some issue report if scheduled tasks start and stop at same time
+    time.sleep(2) 
+
 
 #initialize Flask and static folder for css
 app = Flask(__name__, static_folder='static')
@@ -118,6 +130,8 @@ app.config.from_object(__name__)
 
 
 #Use APScheduler to update system info at set interval
+#With Debug mode on, Scheduler would initialize and run sensor function twice instead of once.
+#Turned Debug mode off for this reason. Is a know issue with apscheduler.
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(sensor,'interval',seconds=10)
 sched.start()

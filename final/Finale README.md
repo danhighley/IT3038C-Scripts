@@ -267,6 +267,6 @@ The use of the variables allows the web site to update its data every 10 seconds
 The loopback 127.0.0.1 is fine when testing the script.    
 With a little tweeking of the host firewall settings I was able to connect to the ip url (in my case: 192.168.1.252:5000) from other devices as intended, as show in the following pic.
 
-![Alt text](Win7System.png)
+![Alt text](othSys.png)
 
 Press Control C in the console to stop the script.

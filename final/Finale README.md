@@ -91,15 +91,13 @@ For example:
 The script refreshes every 10 seconds.     
 When you see the console output the system data you should be able to access the web page.
 
-Console output:
-
-![Alt text](console.png)
-
 To access the web page, open a browser (I'm using edge) and enter the url: localhost:5000
 
 Html output:
 
 ![Alt text](weboutput.png)
+
+You should be able to refresh the web page every 10 seconds to see updated memory and process data.
 
 ==========
 
@@ -155,7 +153,7 @@ The prettytable format is designed for consoles. In order to pass it to the HTML
    #convert memTable to html 
    memTable = memTable.get_html_string()
 ```
-Notice the use of global variables inside the funciton - this allows variable to be passed from Flask to HTML outside of the function.
+Notice the use of global variables inside the funciton - this allows variables used in the function to be passed from Flask to HTML outside of the function.
 
 At this point I initialized app to Flask
 
@@ -173,6 +171,8 @@ sched.add_job(sensor,'interval',seconds=10)
 sched.start()     
 ```
 As mentioned earlier, Flask does not like traditional loops and timers to refresh data, so I could not use a while True loop. Flask will not send the same variable twice over the same thread. To get around this, I used the apscheduler module to schedule a refresh function to pull system information every 10 seconds. The (daemon=True) tells the scheduler to use a new thread each time it pulls the system information with the sensor function. This lets Flask keep the HTML document updated every 10 seconds, or what ever interval you choose.
+
+It was also discovered that the apscheduler does not play nice with the Flask's debug function, causing the schedule to trigger twice every iteration. You could see this on the console output and is a know problem with Flask and Apschedule. To solve this issue, I had to disable Flasks debugger by removing debug=True.
 
 Now we can have Flask send the variables to the HTML
 ``` 

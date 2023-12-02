@@ -2,11 +2,11 @@
 
 ==========
 
-For the Final project, I decided to continue exploring python and flask and create a script that would monitor some system stats and processes that not only print to console but would also be accessalbe via html over the internet. So if you had a system doing something you wanted to keep an eye on remotely, you could enter its ip address remotely and view the system specs if the script was running.
+For the Final project, I decided to continue exploring python and flask and create a script that would monitor some system stats and processes that not only print to console but would also be accessible via html over the internet. So if you had a system doing something you wanted to keep an eye on remotely, you could enter its ip address remotely and view the system specs if the script was running.
 
 ==========
 
-It has been a learning experience getting flask to convert the system information to html and for variables to be dynamically updated at a set interval in the html. So one can simply hit the refress button in the html and see the processes or memory usage update. I'll touch on some of the learning momements in this read me.
+It has been a learning experience getting flask to convert the system information to html and for variables to be dynamically updated at a set interval in the html. So one can simply hit the refresh button in the html and see the processes or memory usage update. I'll touch on some of the learning moments in this read me.
 
 ==========
 
@@ -14,7 +14,7 @@ The python scripts are web.py and sysmonitor.py and the supporting html files wi
 
 ==========
 
-**Python Virtural Environment**
+**Python Virtual Environment**
 
 If your already used to Python's venv method of isolating your project then you can skip this and do what you know how to do.
 If not, do the following to set up your venv virtual environment:
@@ -116,7 +116,7 @@ Noteable ones are:
 - flask - is a web application framework for python, allowing python to create web content.   
 - psutil - allows us to pull certain system information like memory, battery, processes.
 - platform - allows us to pull hostname and operating system information.
-- prettytable - allows us to create foratted tables quickly from arrays and lists.
+- prettytable - allows us to create formatted tables quickly from arrays and lists.
 - apscheduler - allows us to refresh retrieved data at set intervals.
 
 I then created a function to pull the system information called sensor(). Through a little trial and error I determined a function to pull the data was the best route, as I quickly found out that flask does not like while True loops as it tracks variables passed 
@@ -265,7 +265,7 @@ The use of the variables allows the web site to update its data every 10 seconds
 ===========
 
 The loopback 127.0.0.1 is fine when testing the script.    
-With a little tweeking of the host firewall settings I was able to connect to the ip url (in my case: 192.168.1.252:5000) from other devices as intended, as show in the following pic.
+With a little tweaking of the host firewall settings I was able to connect to the ip url (in my case: 192.168.1.252:5000) from other devices as intended, as show in the following pic.
 
 ![Alt text](othSys.png)
 

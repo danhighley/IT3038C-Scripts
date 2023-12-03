@@ -2,7 +2,7 @@
 
 ==========
 
-For the Final project, I decided to continue exploring python and flask and create a script that would monitor some system stats and processes that not only print to console but would also be accessible via html over the internet. So if you had a system doing something you wanted to keep an eye on remotely, you could enter its ip address remotely and view the system specs if the script was running.
+For the Final project, I decided to continue exploring python and flask and create a script that would monitor some system stats and processes that not only print to console but would also be accessible via html over the internet. So if you had a system doing something you wanted to keep an eye on remotely, you could enter its IP address remotely and view the system specs if the script was running.
 
 ==========
 
@@ -10,13 +10,13 @@ It has been a learning experience getting flask to convert the system informatio
 
 ==========
 
-The python scripts are web.py and sysmonitor.py and the supporting html files will layout.html, main.html and styles.css all located in the Final folder in the Github repository. The file structure of its supporting files is important and I'll cover that in a following section. I recommend running the script from the python virtual environment venv folder as there are a few module that will need to be installed. I wrote the script on a Windows 11 system using Windows PowerShell and Windows PowerShell ISE.
+The python scripts are web.py and sysmonitor.py and the supporting html files will be layout.html, main.html and styles.css all located in the Final folder in the Github repository. The file structure of its supporting files is important, and I'll cover that in a following section. I recommend running the script from the python virtual environment venv folder as there are a few modules that will need to be installed. I wrote the script on a Windows 11 system using Windows PowerShell and Windows PowerShell ISE.
 
 ==========
 
 **Python Virtual Environment**
 
-If your already used to Python's venv method of isolating your project then you can skip this and do what you know how to do.
+If your already familiar with Python's venv method of isolating your project then you can skip this and do what you know how to do.
 If not, do the following to set up your venv virtual environment:
 - create a folder on the C: drive called venv.    
 - in PowerShell move to that folder ```C:\venv```    
@@ -61,8 +61,8 @@ The rest of the modules used should already be loaded, if not, use the pip insta
 
 Copy the files from GitHub to your system including the folder setup.   
 These can be in a location of your choosing, but set up just like in Github.    
-Parent folder can be name of your choosing.
-Flask needs the static and template folders to work properly.
+Parent folder can be name of your choosing.     
+Flask needs the static and template folders named as such to work properly.    
 Files needed for this script:
 - web.py
 - sysmonitor.py
@@ -109,10 +109,10 @@ We start the script by opening a web server by running web.py:
 
 This points to and runs sysmonitor.py and starts listening on two ip addresses:   
 - 127.0.0.1:5000 (localhost)   
-- and the ip address of the host system, in my case 192.168.1.252:5000   
+- and the IP address of the host system, in my case 192.168.1.252:5000   
 
 sysmonitor.py auto runs loading the necessary modules.  
-Noteable ones are:   
+Notable ones are:   
 - flask - is a web application framework for python, allowing python to create web content.   
 - psutil - allows us to pull certain system information like memory, battery, processes.
 - platform - allows us to pull hostname and operating system information.
@@ -120,7 +120,7 @@ Noteable ones are:
 - apscheduler - allows us to refresh retrieved data at set intervals.
 
 I then created a function to pull the system information called sensor(). Through a little trial and error I determined a function to pull the data was the best route, as I quickly found out that flask does not like while True loops as it tracks variables passed 
-to the HTML by threads and will not alow the same variable to be passed twice over the same thread. 
+to the HTML by threads and will not allow the same variable to be passed twice over the same thread. 
 
 While you could certainly include other system parameters, I chose a few to illustrate the concept.
 - system name
@@ -130,9 +130,9 @@ While you could certainly include other system parameters, I chose a few to illu
 - memory information
 - top 5 processes by cpu percentage
 
-As stated early, I wrote and tested this on a Windows 11 system. However when I pull the OS release data, it states I'm using Windows 10. Turns out Windows developers still have kernel32.dll pointing to Windows 10 for compatibility issues.
+As stated early, I wrote and tested this on a Windows 11 system. However, when I pull the OS release data, it states I'm using Windows 10. Turns out Windows developers still have kernel32.dll pointing to Windows 10 for compatibility issues.
 
-Using psutil to iterate through specific system data in conjunction with prettytable made pulling that data into a presentable table pretty straight foward with the .add_row() built in function. For example:
+Using psutil to iterate through specific system data in conjunction with prettytable made pulling that data into a presentable table pretty straight forward with the .add_row() built in function. For example:
 
 ``` print("--- Network Info ---")     
     global table     
@@ -153,7 +153,7 @@ The prettytable format is designed for consoles. In order to pass it to the HTML
    #convert memTable to html 
    memTable = memTable.get_html_string()
 ```
-Notice the use of global variables inside the funciton - this allows variables used in the function to be passed from Flask to HTML outside of the function.
+Notice the use of global variables inside the function - this allows variables used in the function to be passed from Flask to HTML outside of the function.
 
 At this point I initialized app to Flask
 
@@ -170,9 +170,9 @@ sched = BackgroundScheduler(daemon=True)
 sched.add_job(sensor,'interval',seconds=10)    
 sched.start()     
 ```
-As mentioned earlier, Flask does not like traditional loops and timers to refresh data, so I could not use a while True loop. Flask will not send the same variable twice over the same thread. To get around this, I used the apscheduler module to schedule a refresh function to pull system information every 10 seconds. The (daemon=True) tells the scheduler to use a new thread each time it pulls the system information with the sensor function. This lets Flask keep the HTML document updated every 10 seconds, or what ever interval you choose.
+As mentioned earlier, Flask does not like traditional loops and timers to refresh data, so I could not use a while True loop. Flask will not send the same variable twice over the same thread. To get around this, I used the apscheduler module to schedule a refresh function to pull system information every 10 seconds. The (daemon=True) tells the scheduler to use a new thread each time it pulls the system information with the sensor function. This lets Flask keep the HTML document updated every 10 seconds, or whatever interval you choose.
 
-It was also discovered that the apscheduler does not play nice with the Flask's debug function, causing the schedule to trigger twice every iteration. You could see this on the console output and is a know problem with Flask and Apschedule. To solve this issue, I had to disable Flasks debugger by removing debug=True.
+It was also discovered that the apscheduler does not play nice with the Flask's debug function, causing the schedule to trigger twice every iteration. You could see this on the console output and is a known problem with Flask and Apschedule. To solve this issue, I had to disable Flasks debugger by removing debug=True.
 
 Now we can have Flask send the variables to the HTML
 ``` 
@@ -213,7 +213,7 @@ Starting with the layout.html
     </body>    
 </html>    
 ```
-While you can spend alot of time developing these, there is a couple points to note:
+While you can spend a lot of time developing these, there is a couple points to note:
 ```
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}" />
 ```
@@ -264,8 +264,9 @@ The use of the variables allows the web site to update its data every 10 seconds
 
 ===========
 
-The loopback 127.0.0.1 is fine when testing the script.    
-With a little tweaking of the host firewall settings I was able to connect to the ip url (in my case: 192.168.1.252:5000) from other devices as intended, as show in the following pic.
+The loopback 127.0.0.1 on port 5000 is fine when testing the script.    
+
+With a little tweaking of the host firewall settings I was able to connect to the IP url (in my case: 192.168.1.252:5000) from other devices as intended, as show in the following pic using a Windows 7 system.
 
 ![Alt text](othSys.png)
 

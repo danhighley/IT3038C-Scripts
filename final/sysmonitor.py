@@ -75,6 +75,9 @@ def sensor():
 
     #Pull the top 5 processes
     #Use of PrettyTable again
+    #CPU percentage needs two calls, first to have a point of reference, 
+    #   then a delay, and second call to record the measurement. Several
+    #   posts about psutil cpu usage is less than task manager.
     print("--- Top 5 Processes ---")
     global procTable
     procTable = PrettyTable(['PID', 'PName', 'Status', 'CPU', 'Num Threads', 'Memory(MB)'])
@@ -93,7 +96,6 @@ def sensor():
     time.sleep(0.1) #Delay to allow for cpu measurement
     for p in proc:
         #second time for measurement
-        #I read taskmonitor cpu% overstated, added a made up factor to close the gap
         top[p] = (p.cpu_percent() / psutil.cpu_count())*7.5 
 
     top_list = sorted(top.items(), key=lambda x: x[1])
@@ -102,6 +104,7 @@ def sensor():
 
     for p, cpu_percent in top5:
         #Some proecesses may exit so use of try-except block
+        #May show on console now and then, but html should not be affected.
         try:
             with p.oneshot():
                 procTable.add_row([
@@ -120,7 +123,8 @@ def sensor():
     #convert procTable to html
     procTable = procTable.get_html_string()
 
-    #Delay between scheduled tasks, some issue report if scheduled tasks start and stop at same time
+    #Atempted delay between scheduled tasks, some issues reported if scheduled 
+    #   tasks start and stop at same time
     time.sleep(2) 
 
 
@@ -136,7 +140,7 @@ sched = BackgroundScheduler(daemon=True)
 sched.add_job(sensor,'interval',seconds=10)
 sched.start()
 
-
+#Have flask send variables to HTML.
 @app.route('/')
 def monitor():
     return render_template("main.html",
